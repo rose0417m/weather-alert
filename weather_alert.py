@@ -5,7 +5,7 @@ from email.mime.text import MIMEText
 
 # Environment Variables
 API_KEY = os.getenv("OWM_API_KEY")
-CITY = "Delhi"   # Change to your city
+CITY = "Kottayam"   
 
 EMAIL_ADDRESS = os.getenv("EMAIL_ADDRESS")
 EMAIL_PASSWORD = os.getenv("EMAIL_PASSWORD")
@@ -41,7 +41,7 @@ def check_weather():
 
     rain_expected = False
 
-    for forecast in data["list"][:8]:  # Next ~24 hours
+    for forecast in data["list"][:8]:  
         weather_main = forecast["weather"][0]["main"]
 
         if weather_main.lower() in ["rain", "drizzle", "thunderstorm"]:

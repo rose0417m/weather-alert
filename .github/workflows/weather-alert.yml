@@ -2,27 +2,31 @@ name: Weather Alert
 
 on:
   schedule:
-    - cron: "0 1 * * *"
+    - cron: "0 * * * *"   # Every hour
+
   workflow_dispatch:
 
 jobs:
-  run-weather-alert:
+  weather-check:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout Repository
+        uses: actions/checkout@v4
 
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
-          python-version: "3.13"
+          python-version: "3.11"
 
-      - name: Install dependencies
-        run: pip install requests
+      - name: Install Dependencies
+        run: |
+          pip install requests
 
-      - name: Run script
+      - name: Run Weather Alert Script
         env:
-          WEATHER_API_KEY: ${{ secrets.WEATHER_API_KEY }}
+          OWM_API_KEY: ${{ secrets.OWM_API_KEY }}
           EMAIL_ADDRESS: ${{ secrets.EMAIL_ADDRESS }}
           EMAIL_PASSWORD: ${{ secrets.EMAIL_PASSWORD }}
+          TO_EMAIL: ${{ secrets.TO_EMAIL }}
         run: python weather_alert.py

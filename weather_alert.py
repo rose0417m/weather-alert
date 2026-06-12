@@ -3,6 +3,8 @@ import smtplib
 import os
 
 API_KEY = os.getenv("WEATHER_API_KEY")
+print("API key found:", API_KEY is not None)
+print("API key length:", len(API_KEY) if API_KEY else 0)
 
 CITY = "Thiruvananthapuram"
 
